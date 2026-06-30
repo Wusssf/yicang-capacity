@@ -318,7 +318,7 @@ td:last-child { border-right: none; }
   <button class="week-btn" id="btn-W2" onclick="selectWeek(this,'W2')">第二周</button>
   <button class="week-btn" id="btn-W3" onclick="selectWeek(this,'W3')">第三周</button>
   <button class="week-btn" id="btn-W4" onclick="selectWeek(this,'W4')">第四周</button>
-  <span style="margin-left:auto;" class="update-time" id="updateTimeTip">更新时间：2026/06/30 13:17:43</span>
+  <span style="margin-left:auto;" class="update-time" id="updateTimeTip">更新时间：2026/06/30 13:26:34</span>
 </div>
 
 <!-- 数据表 -->
@@ -559,7 +559,7 @@ function renderTable() {
   const snap = getCurrentSnapshot();
   const key = snap.key;
 
-  document.getElementById('updateTimeTip').textContent = '更新时间：' + snap.updateTime;
+  // updateTimeTip 已在 HTML 静态注入时设置，不再被 snap.updateTime 覆盖
   document.getElementById('th-old').innerHTML = `<span style="font-size:14px;">在库库存总量</span><br><span style="font-size:11px;font-weight:400;">(PCS) — ${snap.oldLabel}</span>`;
   document.getElementById('th-old').style.color = '#ef9a9a';
   document.getElementById('th-new').innerHTML = `<span style="font-size:14px;">在库库存总量</span><br><span style="font-size:11px;font-weight:400;">(PCS) — ${snap.newLabel}</span>`;
