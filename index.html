@@ -318,7 +318,7 @@ td:last-child { border-right: none; }
   <button class="week-btn" id="btn-W2" onclick="selectWeek(this,'W2')">第二周</button>
   <button class="week-btn" id="btn-W3" onclick="selectWeek(this,'W3')">第三周</button>
   <button class="week-btn" id="btn-W4" onclick="selectWeek(this,'W4')">第四周</button>
-  <span style="margin-left:auto;" class="update-time" id="updateTimeTip">更新时间：2026/5/8</span>
+  <span style="margin-left:auto;" class="update-time" id="updateTimeTip">更新时间：2026/06/30 11:33:45</span>
 </div>
 
 <!-- 数据表 -->
@@ -387,20 +387,20 @@ td:last-child { border-right: none; }
 // =====================================================================
 
 // 时间节点标签（用于折线图）
-const TIME_LABELS = ['3月W2','4月W1','4月W3','5月W1','6月W3'];
+const TIME_LABELS = ['3月W2','4月W1','4月W3','5月W1','6月W3','7月W1','7月W2'];
 
 // 每张截图对应的数据
 // key: 仓库名, value: [3月W2当期, 4月W1当期, 4月W3当期, 5月W1当期]
 const HISTORY = {
-  '柏林仓':     [144490, 122556, 115771, 106970, 94232],
-  '拉格比仓':   [116732, 115193, 114740, 110803, 108101],
-  '卢顿仓':     [92347,  85781,  82994,  87746,  96767],
-  '洛杉矶3仓':  [93676,  87484,  85546,  84023,  93822],
-  '美东2615仓': [83502,  78204,  73967,  67398,  42254],
-  '千叶天户町仓':[121774, 127090, 124201, 122034, 90762],
-  '千叶六方町仓':[122455, 137889, 123143, 107176, 121383],
-  '大阪箕面仓': [123767, 114078, 113241, 104319, 106089],
-  '大阪贝塚仓': [13823,  13039,  12769,  12544,  11746],
+  '柏林仓':     [144490, 122556, 115771, 106970, 94232, 92711, 92516],
+  '拉格比仓':     [116732, 115193, 114740, 110803, 108101, 106997, 105710],
+  '卢顿仓':     [92347, 85781, 82994, 87746, 96767, 98802, 97148],
+  '洛杉矶3仓':     [93676, 87484, 85546, 84023, 93822, 91960, 90980],
+  '美东2615仓':     [83502, 78204, 73967, 67398, 42254, 44071, 44071],
+  '千叶天户町仓':     [121774, 127090, 124201, 122034, 90762, 90762, 81216],
+  '千叶六方町仓':     [122455, 137889, 123143, 107176, 121383, 121383, 115404],
+  '大阪箕面仓':     [123767, 114078, 113241, 104319, 106089, 106089, 100552],
+  '大阪贝塚仓':     [13823, 13039, 12769, 12544, 11746, 11746, 11386]
 };
 
 // 表格完整数据，按时间节点
@@ -409,122 +409,150 @@ const WAREHOUSES = [
     region:'de', regionName:'德国（DE）', rowspan:1, warehouse:'柏林仓',
     cbm:5438,
     snapshots:{
-      '2026-03-W2':{ useRate:'65%', urc:'rate-normal', yclCbm:'1250.13', yclPct:'35%', yps:false, oldInv:154817, newInv:144490, status:'status-down', statusText:'减少', biz:'' },
-      '2026-04-W1':{ useRate:'65%', urc:'rate-normal', yclCbm:'1052.41', yclPct:'30%', yps:false, oldInv:144490, newInv:122556, status:'status-down', statusText:'减少', biz:'' },
-      '2026-04-W3':{ useRate:'65%', urc:'rate-normal', yclCbm:'1013.77', yclPct:'29%', yps:false, oldInv:122556, newInv:115771, status:'status-down', statusText:'减少', biz:'' },
-      '2026-05-W1':{ useRate:'69%', urc:'rate-normal', yclCbm:'956.69', yclPct:'100%', yps:true, oldInv:115771, newInv:106970, status:'status-down', statusText:'减少', biz:'' },
-      '2026-06-W3':{ useRate:'65%', urc:'rate-normal', yclCbm:'1094.03', yclPct:'-', yps:false, oldInv:106970, newInv:94232, status:'status-down', statusText:'减少', biz:'' },
+      '2026-03-W2':{ useRate:'65%', urc:'rate-normal', yclCbm:'1250.13', yclPct:'35%', yps:false, oldInv:154817, newInv:144490, status:'status-down', statusText:'减少', biz:"" },
+      '2026-04-W1':{ useRate:'65%', urc:'rate-normal', yclCbm:'1052.41', yclPct:'30%', yps:false, oldInv:144490, newInv:122556, status:'status-down', statusText:'减少', biz:"" },
+      '2026-04-W3':{ useRate:'65%', urc:'rate-normal', yclCbm:'1013.77', yclPct:'29%', yps:false, oldInv:122556, newInv:115771, status:'status-down', statusText:'减少', biz:"" },
+      '2026-05-W1':{ useRate:'69%', urc:'rate-normal', yclCbm:'956.69', yclPct:'100%', yps:false, oldInv:115771, newInv:106970, status:'status-down', statusText:'减少', biz:"" },
+      '2026-06-W3':{ useRate:'-', urc:'rate-normal', yclCbm:'1094.03', yclPct:'-', yps:false, oldInv:106970, newInv:94232, status:'status-down', statusText:'减少', biz:"" },
+      '2026-07-W1':{ useRate:'-', urc:'rate-normal', yclCbm:'1,093.54', yclPct:'-', yps:false, oldInv:94232, newInv:92711, status:'status-down', statusText:'减少', biz:"" },
+      '2026-07-W2':{ useRate:'-', urc:'rate-normal', yclCbm:'1,094.15', yclPct:'-', yps:false, oldInv:94232, newInv:92516, status:'status-flat', statusText:'持平', biz:"" }
     }
   },
   {
-    region:'uk', regionName:'英国（UK）', rowspan:2, warehouse:'拉格比仓',
+    region:'uk', regionName:null, rowspan:0, warehouse:'拉格比仓',
     cbm:3500,
     snapshots:{
-      '2026-03-W2':{ useRate:'85%', urc:'rate-orange', yclCbm:'1403.63', yclPct:'47%', yps:false, oldInv:116925, newInv:116732, status:'status-flat', statusText:'持平', biz:'' },
-      '2026-04-W1':{ useRate:'85%', urc:'rate-orange', yclCbm:'1756.65', yclPct:'59%', yps:false, oldInv:116732, newInv:115193, status:'status-flat', statusText:'持平', biz:'' },
-      '2026-04-W3':{ useRate:'85%', urc:'rate-orange', yclCbm:'1815.79', yclPct:'61%', yps:false, oldInv:115193, newInv:114740, status:'status-flat', statusText:'持平', biz:'' },
-      '2026-05-W1':{ useRate:'85%', urc:'rate-orange', yclCbm:'1,631.76', yclPct:'55%', yps:false, oldInv:114740, newInv:110803, status:'status-down', statusText:'减少', biz:'' },
-      '2026-06-W3':{ useRate:'85%', urc:'rate-orange', yclCbm:'1,844.35', yclPct:'62%', yps:false, oldInv:110803, newInv:108101, status:'status-flat', statusText:'持平', biz:'' },
+      '2026-03-W2':{ useRate:'85%', urc:'rate-normal', yclCbm:'1403.63', yclPct:'47%', yps:false, oldInv:116925, newInv:116732, status:'status-flat', statusText:'持平', biz:"" },
+      '2026-04-W1':{ useRate:'85%', urc:'rate-normal', yclCbm:'1756.65', yclPct:'59%', yps:false, oldInv:116732, newInv:115193, status:'status-flat', statusText:'持平', biz:"" },
+      '2026-04-W3':{ useRate:'85%', urc:'rate-normal', yclCbm:'1815.79', yclPct:'61%', yps:false, oldInv:115193, newInv:114740, status:'status-flat', statusText:'持平', biz:"" },
+      '2026-05-W1':{ useRate:'85%', urc:'rate-normal', yclCbm:'1,631.76', yclPct:'55%', yps:false, oldInv:114740, newInv:110803, status:'status-down', statusText:'减少', biz:"" },
+      '2026-06-W3':{ useRate:'85%', urc:'rate-normal', yclCbm:'1,844.35', yclPct:'62%', yps:false, oldInv:110803, newInv:108101, status:'status-flat', statusText:'持平', biz:"" },
+      '2026-07-W1':{ useRate:'85%', urc:'rate-normal', yclCbm:'1,847.65', yclPct:'62%', yps:false, oldInv:108101, newInv:106997, status:'status-down', statusText:'减少', biz:"" },
+      '2026-07-W2':{ useRate:'85%', urc:'rate-normal', yclCbm:'1,818.43', yclPct:'62%', yps:false, oldInv:108101, newInv:105710, status:'status-down', statusText:'减少', biz:"" }
     }
   },
   {
     region:'uk', regionName:null, rowspan:0, warehouse:'卢顿仓',
     cbm:4200,
     snapshots:{
-      '2026-03-W2':{ useRate:'50%', urc:'rate-normal', yclCbm:'362.6', yclPct:'17%', yps:false, oldInv:90928, newInv:92347, status:'status-up', statusText:'增加', biz:'新客户轻小件' },
-      '2026-04-W1':{ useRate:'50%', urc:'rate-normal', yclCbm:'335', yclPct:'16%', yps:false, oldInv:92347, newInv:85781, status:'status-down', statusText:'减少', biz:'新客户轻小件' },
-      '2026-04-W3':{ useRate:'50%', urc:'rate-normal', yclCbm:'359', yclPct:'17%', yps:false, oldInv:85781, newInv:82994, status:'status-down', statusText:'减少', biz:'新客户轻小件' },
-      '2026-05-W1':{ useRate:'50%', urc:'rate-normal', yclCbm:'581.55', yclPct:'25%', yps:false, oldInv:82994, newInv:87746, status:'status-up', statusText:'增加', biz:'全货型仓库，新客户优先入卢顿仓。' },
-      '2026-06-W3':{ useRate:'50%', urc:'rate-normal', yclCbm:'606.15', yclPct:'29%', yps:false, oldInv:87746, newInv:96767, status:'status-up', statusText:'增加', biz:'全货型仓库，新客户优先入卢顿仓。' },
+      '2026-03-W2':{ useRate:'50%', urc:'rate-normal', yclCbm:'362.6', yclPct:'17%', yps:false, oldInv:90928, newInv:92347, status:'status-up', statusText:'增加', biz:"全货型仓库，新客户优先入卢顿仓。" },
+      '2026-04-W1':{ useRate:'50%', urc:'rate-normal', yclCbm:'335', yclPct:'16%', yps:false, oldInv:92347, newInv:85781, status:'status-down', statusText:'减少', biz:"全货型仓库，新客户优先入卢顿仓。" },
+      '2026-04-W3':{ useRate:'50%', urc:'rate-normal', yclCbm:'359', yclPct:'17%', yps:false, oldInv:85781, newInv:82994, status:'status-down', statusText:'减少', biz:"全货型仓库，新客户优先入卢顿仓。" },
+      '2026-05-W1':{ useRate:'50%', urc:'rate-normal', yclCbm:'581.55', yclPct:'25%', yps:false, oldInv:82994, newInv:87746, status:'status-up', statusText:'增加', biz:"全货型仓库，新客户优先入卢顿仓。" },
+      '2026-06-W3':{ useRate:'50%', urc:'rate-normal', yclCbm:'606.15', yclPct:'29%', yps:false, oldInv:87746, newInv:96767, status:'status-up', statusText:'增加', biz:"全货型仓库，新客户优先入卢顿仓。" },
+      '2026-07-W1':{ useRate:'40%', urc:'rate-normal', yclCbm:'1,700.42', yclPct:'101%', yps:false, oldInv:96767, newInv:98802, status:'status-up', statusText:'增加', biz:"全货型仓库，新客户优先入卢顿仓。" },
+      '2026-07-W2':{ useRate:'50%', urc:'rate-normal', yclCbm:'1,683.24', yclPct:'29%', yps:false, oldInv:96767, newInv:97148, status:'status-flat', statusText:'持平', biz:"全货型仓库，新客户优先入卢顿仓。" }
     }
   },
   {
-    region:'us', regionName:'美国（US）', rowspan:2, warehouse:'洛杉矶3仓',
+    region:'us', regionName:null, rowspan:0, warehouse:'洛杉矶3仓',
     cbm:7034,
     snapshots:{
-      '2026-03-W2':{ useRate:'75%', urc:'rate-normal', yclCbm:'628.61', yclPct:'12%', yps:false, oldInv:82458, newInv:93676, status:'status-up', statusText:'增加', biz:'特殊操作按订单分批处理，正在逐步推进。' },
-      '2026-04-W1':{ useRate:'75%', urc:'rate-normal', yclCbm:'565.28', yclPct:'11%', yps:false, oldInv:93676, newInv:87484, status:'status-down', statusText:'减少', biz:'特殊操作按订单分批处理，正在逐步推进。' },
-      '2026-04-W3':{ useRate:'75%', urc:'rate-normal', yclCbm:'546.06', yclPct:'10%', yps:false, oldInv:87484, newInv:85546, status:'status-down', statusText:'减少', biz:'特殊操作按订单分批处理，正在逐步推进。' },
-      '2026-05-W1':{ useRate:'75%', urc:'rate-normal', yclCbm:'659.16', yclPct:'12%', yps:false, oldInv:85546, newInv:84023, status:'status-flat', statusText:'持平', biz:'仓库增值服务正持续完善执行流程。' },
-      '2026-06-W3':{ useRate:'75%', urc:'rate-normal', yclCbm:'654.64', yclPct:'12%', yps:false, oldInv:84023, newInv:93822, status:'status-up', statusText:'增加', biz:'仓库增值服务正持续完善执行流程。' },
+      '2026-03-W2':{ useRate:'75%', urc:'rate-normal', yclCbm:'628.61', yclPct:'12%', yps:false, oldInv:82458, newInv:93676, status:'status-up', statusText:'增加', biz:"仓库增值服务正持续完善执行流程。" },
+      '2026-04-W1':{ useRate:'75%', urc:'rate-normal', yclCbm:'565.28', yclPct:'11%', yps:false, oldInv:93676, newInv:87484, status:'status-down', statusText:'减少', biz:"仓库增值服务正持续完善执行流程。" },
+      '2026-04-W3':{ useRate:'75%', urc:'rate-normal', yclCbm:'546.06', yclPct:'10%', yps:false, oldInv:87484, newInv:85546, status:'status-down', statusText:'减少', biz:"仓库增值服务正持续完善执行流程。" },
+      '2026-05-W1':{ useRate:'75%', urc:'rate-normal', yclCbm:'659.16', yclPct:'12%', yps:false, oldInv:85546, newInv:84023, status:'status-flat', statusText:'持平', biz:"仓库增值服务正持续完善执行流程。" },
+      '2026-06-W3':{ useRate:'75%', urc:'rate-normal', yclCbm:'654.64', yclPct:'12%', yps:false, oldInv:84023, newInv:93822, status:'status-up', statusText:'增加', biz:"仓库增值服务正持续完善执行流程。" },
+      '2026-07-W1':{ useRate:'75%', urc:'rate-normal', yclCbm:'677.00', yclPct:'13%', yps:false, oldInv:93822, newInv:91960, status:'status-down', statusText:'减少', biz:"仓库增值服务正持续完善执行流程。" },
+      '2026-07-W2':{ useRate:'75%', urc:'rate-normal', yclCbm:'674.45', yclPct:'12%', yps:false, oldInv:93822, newInv:90980, status:'status-down', statusText:'减少', biz:"仓库增值服务正持续完善执行流程。" }
     }
   },
   {
     region:'us', regionName:null, rowspan:0, warehouse:'美东2615仓',
     cbm:722,
     snapshots:{
-      '2026-03-W2':{ useRate:'78%', urc:'rate-normal', yclCbm:'565.93', yclPct:'100%', yps:true, oldInv:88095, newInv:83502, status:'status-down', statusText:'减少', biz:'接受中大件客户入仓，谨慎小件入仓。' },
-      '2026-04-W1':{ useRate:'69%', urc:'rate-normal', yclCbm:'495.67', yclPct:'100%', yps:true, oldInv:83502, newInv:78204, status:'status-down', statusText:'减少', biz:'接受中大件客户入仓，谨慎小件入仓。' },
-      '2026-04-W3':{ useRate:'61%', urc:'rate-normal', yclCbm:'442.66', yclPct:'100%', yps:true, oldInv:78204, newInv:73967, status:'status-down', statusText:'减少', biz:'接受中大件客户入仓，谨慎小件入仓。' },
-      '2026-05-W1':{ useRate:'53%', urc:'rate-normal', yclCbm:'380.95', yclPct:'100%', yps:true, oldInv:69880, newInv:67398, status:'status-down', statusText:'减少', biz:'接受中大件客户入仓，谨慎小件入仓。' },
-      '2026-06-W3':{ useRate:'44%', urc:'rate-normal', yclCbm:'314.23', yclPct:'100%', yps:true, oldInv:67398, newInv:42254, status:'status-down', statusText:'减少', biz:'接受中大件客户入仓，谨慎小件入仓。' },
+      '2026-03-W2':{ useRate:'78%', urc:'rate-normal', yclCbm:'565.93', yclPct:'100%', yps:true, oldInv:88095, newInv:83502, status:'status-down', statusText:'减少', biz:"接受中大件客户入仓，谨慎小件入仓。" },
+      '2026-04-W1':{ useRate:'69%', urc:'rate-normal', yclCbm:'495.67', yclPct:'100%', yps:true, oldInv:83502, newInv:78204, status:'status-down', statusText:'减少', biz:"接受中大件客户入仓，谨慎小件入仓。" },
+      '2026-04-W3':{ useRate:'61%', urc:'rate-normal', yclCbm:'442.66', yclPct:'100%', yps:true, oldInv:78204, newInv:73967, status:'status-down', statusText:'减少', biz:"接受中大件客户入仓，谨慎小件入仓。" },
+      '2026-05-W1':{ useRate:'53%', urc:'rate-normal', yclCbm:'380.95', yclPct:'100%', yps:true, oldInv:69880, newInv:67398, status:'status-down', statusText:'减少', biz:"接受中大件客户入仓，谨慎小件入仓。" },
+      '2026-06-W3':{ useRate:'44%', urc:'rate-normal', yclCbm:'314.23', yclPct:'100%', yps:true, oldInv:67398, newInv:42254, status:'status-down', statusText:'减少', biz:"接受中大件客户入仓，谨慎小件入仓。" },
+      '2026-07-W1':{ useRate:'59%', urc:'rate-normal', yclCbm:'427.29', yclPct:'100%', yps:true, oldInv:42254, newInv:44071, status:'status-up', statusText:'增加', biz:"接受中大件客户入仓，谨慎小件入仓。" },
+      '2026-07-W2':{ useRate:'44%', urc:'rate-normal', yclCbm:'427.29', yclPct:'100%', yps:true, oldInv:42254, newInv:44071, status:'status-up', statusText:'增加', biz:"接受中大件客户入仓，谨慎小件入仓。" }
     }
   },
   {
-    region:'jp', regionName:'日本（JP）', rowspan:4, warehouse:'千叶天户町仓',
+    region:'jp', regionName:null, rowspan:0, warehouse:'千叶天户町仓',
     cbm:'-',
     snapshots:{
-      '2026-03-W2':{ useRate:'95%', urc:'rate-red', yclCbm:'476.84', yclPct:'-', yps:false, oldInv:125831, newInv:121774, status:'status-down', statusText:'减少', biz:'爆仓，日邮小货优先（佐川小件为补日邮小货优先入仓）' },
-      '2026-04-W1':{ useRate:'90%', urc:'rate-red', yclCbm:'476.84', yclPct:'-', yps:false, oldInv:121774, newInv:127090, status:'status-up', statusText:'增加', biz:'爆仓，日邮小货优先（佐川小件为补日邮小货优先入仓）调整客案中，调整前商品暂时入六方仓' },
-      '2026-04-W3':{ useRate:'85%', urc:'rate-orange', yclCbm:'476.84', yclPct:'-', yps:false, oldInv:127090, newInv:124201, status:'status-down', statusText:'减少', biz:'库容饱和，目前以退品、义达小包退货以及现有客户一件代发为主，暂无法承载大量一件代发。' },
-      '2026-05-W1':{ useRate:'85%', urc:'rate-orange', yclCbm:'400.50', yclPct:'-', yps:false, oldInv:124201, newInv:122034, status:'status-flat', statusText:'持平', biz:'库容饱和，目前以退品、义达小包退货以及现有客户一件代发为主，暂无法承载大量一件代发。' },
-      '2026-06-W3':{ useRate:'85%', urc:'rate-orange', yclCbm:'286.99', yclPct:'-', yps:false, oldInv:122034, newInv:90762, status:'status-down', statusText:'减少', biz:'库容饱和，目前以退品、义达小包退货以及现有客户一件代发为主，暂无法承载大量一件代发。' },
+      '2026-03-W2':{ useRate:'95%', urc:'rate-normal', yclCbm:'476.84', yclPct:'-', yps:true, oldInv:125831, newInv:121774, status:'status-down', statusText:'减少', biz:"库容饱和，目前以退品、义达小包退货以及现有客户一件代发为主，暂无法承载大量一件代发。" },
+      '2026-04-W1':{ useRate:'90%', urc:'rate-normal', yclCbm:'476.84', yclPct:'-', yps:true, oldInv:121774, newInv:127090, status:'status-up', statusText:'增加', biz:"库容饱和，目前以退品、义达小包退货以及现有客户一件代发为主，暂无法承载大量一件代发。" },
+      '2026-04-W3':{ useRate:'85%', urc:'rate-normal', yclCbm:'476.84', yclPct:'-', yps:true, oldInv:127090, newInv:124201, status:'status-down', statusText:'减少', biz:"库容饱和，目前以退品、义达小包退货以及现有客户一件代发为主，暂无法承载大量一件代发。" },
+      '2026-05-W1':{ useRate:'85%', urc:'rate-normal', yclCbm:'400.50', yclPct:'-', yps:true, oldInv:124201, newInv:122034, status:'status-flat', statusText:'持平', biz:"库容饱和，目前以退品、义达小包退货以及现有客户一件代发为主，暂无法承载大量一件代发。" },
+      '2026-06-W3':{ useRate:'85%', urc:'rate-normal', yclCbm:'286.99', yclPct:'-', yps:true, oldInv:122034, newInv:90762, status:'status-down', statusText:'减少', biz:"库容饱和，目前以退品、义达小包退货以及现有客户一件代发为主，暂无法承载大量一件代发。" },
+      '2026-07-W1':{ useRate:'85%', urc:'rate-normal', yclCbm:'286.99', yclPct:'-', yps:true, oldInv:90762, newInv:90762, status:'status-flat', statusText:'持平', biz:"库容饱和，目前以退品、义达小包退货以及现有客户一件代发为主，暂无法承载大量一件代发。" },
+      '2026-07-W2':{ useRate:'85%', urc:'rate-normal', yclCbm:'266.51', yclPct:'-', yps:true, oldInv:90762, newInv:81216, status:'status-down', statusText:'减少', biz:"库容饱和，目前以退品、义达小包退货以及现有客户一件代发为主，暂无法承载大量一件代发。" }
     }
   },
   {
     region:'jp', regionName:null, rowspan:0, warehouse:'千叶六方町仓',
     cbm:'-',
     snapshots:{
-      '2026-03-W2':{ useRate:'70%', urc:'rate-normal', yclCbm:'1,822.17', yclPct:'-', yps:false, oldInv:128487, newInv:122455, status:'status-down', statusText:'减少', biz:'库容充足，大件仓（化妆品，食品类 恒温环境良好）' },
-      '2026-04-W1':{ useRate:'70%', urc:'rate-normal', yclCbm:'1,822.17', yclPct:'-', yps:false, oldInv:122455, newInv:137889, status:'status-up', statusText:'增加', biz:'库容充足，大件仓（化妆品，食品类 恒温环境良好）' },
-      '2026-04-W3':{ useRate:'60%', urc:'rate-normal', yclCbm:'1,822.17', yclPct:'-', yps:false, oldInv:137889, newInv:123143, status:'status-down', statusText:'减少', biz:'库容充足，中大件/mini投函小件全覆盖，需要大量货物支持，日均单量多的客户优先，尽量避免测品客户以及零散客户\n（化妆品/食品类等恒温环境良好）' },
-      '2026-05-W1':{ useRate:'60%', urc:'rate-normal', yclCbm:'1,644.47', yclPct:'-', yps:false, oldInv:123143, newInv:107176, status:'status-down', statusText:'减少', biz:'库容充足，中大件/mini投函小件全覆盖，需要大量货物支持，日均单量多的客户优先，尽量避免测品客户以及零散客户\n（化妆品/食品类等恒温环境良好）' },
-      '2026-06-W3':{ useRate:'60%', urc:'rate-normal', yclCbm:'1,986.40', yclPct:'-', yps:false, oldInv:107176, newInv:121383, status:'status-up', statusText:'增加', biz:'库容充足，中大件/mini投函小件全覆盖，需要大量货物支持，日均单量多的客户优先，尽量避免测品客户以及零散客户\n（化妆品/食品类等恒温环境良好）' },
+      '2026-03-W2':{ useRate:'70%', urc:'rate-normal', yclCbm:'1,822.17', yclPct:'-', yps:false, oldInv:128487, newInv:122455, status:'status-down', statusText:'减少', biz:"库容充足，中大件/mini投函小件全覆盖，需要大量货物支持，日均单量多的客户优先，尽量避免测品客户以及零散客户
+（化妆品/食品类等恒温环境良好）" },
+      '2026-04-W1':{ useRate:'70%', urc:'rate-normal', yclCbm:'1,822.17', yclPct:'-', yps:false, oldInv:122455, newInv:137889, status:'status-up', statusText:'增加', biz:"库容充足，中大件/mini投函小件全覆盖，需要大量货物支持，日均单量多的客户优先，尽量避免测品客户以及零散客户
+（化妆品/食品类等恒温环境良好）" },
+      '2026-04-W3':{ useRate:'60%', urc:'rate-normal', yclCbm:'1,822.17', yclPct:'-', yps:false, oldInv:137889, newInv:123143, status:'status-down', statusText:'减少', biz:"库容充足，中大件/mini投函小件全覆盖，需要大量货物支持，日均单量多的客户优先，尽量避免测品客户以及零散客户
+（化妆品/食品类等恒温环境良好）" },
+      '2026-05-W1':{ useRate:'60%', urc:'rate-normal', yclCbm:'1,644.47', yclPct:'-', yps:false, oldInv:123143, newInv:107176, status:'status-down', statusText:'减少', biz:"库容充足，中大件/mini投函小件全覆盖，需要大量货物支持，日均单量多的客户优先，尽量避免测品客户以及零散客户
+（化妆品/食品类等恒温环境良好）" },
+      '2026-06-W3':{ useRate:'60%', urc:'rate-normal', yclCbm:'1,986.40', yclPct:'-', yps:false, oldInv:107176, newInv:121383, status:'status-up', statusText:'增加', biz:"库容充足，中大件/mini投函小件全覆盖，需要大量货物支持，日均单量多的客户优先，尽量避免测品客户以及零散客户
+（化妆品/食品类等恒温环境良好）" },
+      '2026-07-W1':{ useRate:'60%', urc:'rate-normal', yclCbm:'1,986.40', yclPct:'-', yps:false, oldInv:121383, newInv:121383, status:'status-flat', statusText:'持平', biz:"库容充足，中大件/mini投函小件全覆盖，需要大量货物支持，日均单量多的客户优先，尽量避免测品客户以及零散客户
+（化妆品/食品类等恒温环境良好）" },
+      '2026-07-W2':{ useRate:'60%', urc:'rate-normal', yclCbm:'1,998.37', yclPct:'-', yps:false, oldInv:121383, newInv:115404, status:'status-down', statusText:'减少', biz:"库容充足，中大件/mini投函小件全覆盖，需要大量货物支持，日均单量多的客户优先，尽量避免测品客户以及零散客户
+（化妆品/食品类等恒温环境良好）" }
     }
   },
   {
     region:'jp', regionName:null, rowspan:0, warehouse:'大阪箕面仓',
     cbm:'-',
     snapshots:{
-      '2026-03-W2':{ useRate:'90%', urc:'rate-red', yclCbm:'1670.18', yclPct:'-', yps:false, oldInv:127283, newInv:123767, status:'status-down', statusText:'减少', biz:'爆仓，仅限老客户补仓（老客户大货 尽量引导入千叶六方町），新客户限制创建库单，已实行系统限制' },
-      '2026-04-W1':{ useRate:'80%', urc:'rate-orange', yclCbm:'1670.18', yclPct:'-', yps:false, oldInv:123767, newInv:114078, status:'status-down', statusText:'减少', biz:'爆仓，仅限老客户补仓（老客户大货 尽量引导入千叶六方町），新客户限制创建库单，已实行系统限制' },
-      '2026-04-W3':{ useRate:'70%', urc:'rate-normal', yclCbm:'1670.18', yclPct:'-', yps:false, oldInv:114078, newInv:113241, status:'status-flat', statusText:'持平', biz:'库容有所缓解，机器人设备已上线，可优先机器人操作件以及千叶大阪双仓兼用的VIP客户，货物要求三边和80厘米/重量10KG以内。' },
-      '2026-05-W1':{ useRate:'70%', urc:'rate-normal', yclCbm:'1,278.48', yclPct:'-', yps:false, oldInv:113241, newInv:104319, status:'status-down', statusText:'减少', biz:'库容有所缓解，机器人设备已上线，可优先机器人操作件以及千叶大阪双仓兼用的VIP客户，货物要求三边和80厘米/重量10KG以内。' },
-      '2026-06-W3':{ useRate:'70%', urc:'rate-normal', yclCbm:'1,532.06', yclPct:'-', yps:false, oldInv:104319, newInv:106089, status:'status-flat', statusText:'持平', biz:'库容有所缓解，机器人设备已上线，可优先机器人操作件以及千叶大阪双仓兼用的VIP客户，货物要求三边和80厘米/重量10KG以内。' },
+      '2026-03-W2':{ useRate:'90%', urc:'rate-normal', yclCbm:'1670.18', yclPct:'-', yps:false, oldInv:127283, newInv:123767, status:'status-down', statusText:'减少', biz:"库容有所缓解，机器人设备已上线，可优先机器人操作件以及千叶大阪双仓兼用的VIP客户，货物要求三边和80厘米/重量10KG以内。" },
+      '2026-04-W1':{ useRate:'80%', urc:'rate-normal', yclCbm:'1670.18', yclPct:'-', yps:false, oldInv:123767, newInv:114078, status:'status-down', statusText:'减少', biz:"库容有所缓解，机器人设备已上线，可优先机器人操作件以及千叶大阪双仓兼用的VIP客户，货物要求三边和80厘米/重量10KG以内。" },
+      '2026-04-W3':{ useRate:'70%', urc:'rate-normal', yclCbm:'1670.18', yclPct:'-', yps:false, oldInv:114078, newInv:113241, status:'status-flat', statusText:'持平', biz:"库容有所缓解，机器人设备已上线，可优先机器人操作件以及千叶大阪双仓兼用的VIP客户，货物要求三边和80厘米/重量10KG以内。" },
+      '2026-05-W1':{ useRate:'70%', urc:'rate-normal', yclCbm:'1,278.48', yclPct:'-', yps:false, oldInv:113241, newInv:104319, status:'status-down', statusText:'减少', biz:"库容有所缓解，机器人设备已上线，可优先机器人操作件以及千叶大阪双仓兼用的VIP客户，货物要求三边和80厘米/重量10KG以内。" },
+      '2026-06-W3':{ useRate:'70%', urc:'rate-normal', yclCbm:'1,532.06', yclPct:'-', yps:false, oldInv:104319, newInv:106089, status:'status-flat', statusText:'持平', biz:"库容有所缓解，机器人设备已上线，可优先机器人操作件以及千叶大阪双仓兼用的VIP客户，货物要求三边和80厘米/重量10KG以内。" },
+      '2026-07-W1':{ useRate:'70%', urc:'rate-normal', yclCbm:'1,532.06', yclPct:'-', yps:false, oldInv:106089, newInv:106089, status:'status-flat', statusText:'持平', biz:"库容有所缓解，机器人设备已上线，可优先机器人操作件以及千叶大阪双仓兼用的VIP客户，货物要求三边和80厘米/重量10KG以内。" },
+      '2026-07-W2':{ useRate:'70%', urc:'rate-normal', yclCbm:'1,354.61', yclPct:'-', yps:false, oldInv:106089, newInv:100552, status:'status-down', statusText:'减少', biz:"库容有所缓解，机器人设备已上线，可优先机器人操作件以及千叶大阪双仓兼用的VIP客户，货物要求三边和80厘米/重量10KG以内。" }
     }
   },
   {
     region:'jp', regionName:null, rowspan:0, warehouse:'大阪贝塚仓',
     cbm:'-',
     snapshots:{
-      '2026-03-W2':{ useRate:'99%', urc:'rate-red', yclCbm:'34.39', yclPct:'-', yps:false, oldInv:13712, newInv:13823, status:'status-flat', statusText:'持平', biz:'实际爆仓状态放缓，商货退为主-部分老客户一件代发' },
-      '2026-04-W1':{ useRate:'99%', urc:'rate-red', yclCbm:'34.39', yclPct:'-', yps:false, oldInv:13823, newInv:13039, status:'status-down', statusText:'减少', biz:'实际爆仓状态放缓，商货退为主-部分老客户一件代发' },
-      '2026-04-W3':{ useRate:'90%', urc:'rate-red', yclCbm:'34.39', yclPct:'-', yps:false, oldInv:13039, newInv:12769, status:'status-flat', statusText:'持平', biz:'库容饱和，新客户暂停入仓，目前商流运营为主，少部分老客户一件代发。' },
-      '2026-05-W1':{ useRate:'90%', urc:'rate-red', yclCbm:'25.23', yclPct:'-', yps:false, oldInv:12769, newInv:12544, status:'status-flat', statusText:'持平', biz:'库容饱和，新客户暂停入仓，目前商流运营为主，少部分老客户一件代发。' },
-      '2026-06-W3':{ useRate:'90%', urc:'rate-red', yclCbm:'21.74', yclPct:'-', yps:false, oldInv:12544, newInv:11746, status:'status-down', statusText:'减少', biz:'库容饱和，新客户暂停入仓，目前商流运营为主，少部分老客户一件代发。' },
+      '2026-03-W2':{ useRate:'99%', urc:'rate-normal', yclCbm:'34.39', yclPct:'-', yps:false, oldInv:13712, newInv:13823, status:'status-flat', statusText:'持平', biz:"库容饱和，新客户暂停入仓，目前商流运营为主，少部分老客户一件代发。" },
+      '2026-04-W1':{ useRate:'99%', urc:'rate-normal', yclCbm:'34.39', yclPct:'-', yps:false, oldInv:13823, newInv:13039, status:'status-down', statusText:'减少', biz:"库容饱和，新客户暂停入仓，目前商流运营为主，少部分老客户一件代发。" },
+      '2026-04-W3':{ useRate:'90%', urc:'rate-normal', yclCbm:'34.39', yclPct:'-', yps:false, oldInv:13039, newInv:12769, status:'status-flat', statusText:'持平', biz:"库容饱和，新客户暂停入仓，目前商流运营为主，少部分老客户一件代发。" },
+      '2026-05-W1':{ useRate:'90%', urc:'rate-normal', yclCbm:'25.23', yclPct:'-', yps:false, oldInv:12769, newInv:12544, status:'status-flat', statusText:'持平', biz:"库容饱和，新客户暂停入仓，目前商流运营为主，少部分老客户一件代发。" },
+      '2026-06-W3':{ useRate:'90%', urc:'rate-normal', yclCbm:'21.74', yclPct:'-', yps:false, oldInv:12544, newInv:11746, status:'status-down', statusText:'减少', biz:"库容饱和，新客户暂停入仓，目前商流运营为主，少部分老客户一件代发。" },
+      '2026-07-W1':{ useRate:'90%', urc:'rate-normal', yclCbm:'21.74', yclPct:'-', yps:false, oldInv:11746, newInv:11746, status:'status-flat', statusText:'持平', biz:"库容饱和，新客户暂停入仓，目前商流运营为主，少部分老客户一件代发。" },
+      '2026-07-W2':{ useRate:'90%', urc:'rate-normal', yclCbm:'20.64', yclPct:'-', yps:false, oldInv:11746, newInv:11386, status:'status-down', statusText:'减少', biz:"库容饱和，新客户暂停入仓，目前商流运营为主，少部分老客户一件代发。" }
     }
   }
 ];
 
 // 可用时间节点及显示信息
 const SNAPSHOTS = [
-  { key:'2026-03-W2', month:'2026-03', week:'W2', label:'3月W2', updateTime:'2026/3/13', oldLabel:'2.27', newLabel:'3.13' },
-  { key:'2026-04-W1', month:'2026-04', week:'W1', label:'4月W1', updateTime:'2026/4/10', oldLabel:'3.13', newLabel:'4.10' },
-  { key:'2026-04-W3', month:'2026-04', week:'W3', label:'4月W3', updateTime:'2026/4/24', oldLabel:'4.10', newLabel:'4.24' },
-  { key:'2026-05-W1', month:'2026-05', week:'W1', label:'5月W1', updateTime:'2026/5/8', oldLabel:'4.24', newLabel:'5.7' },
-  { key:'2026-06-W3', month:'2026-06', week:'W3', label:'6月W3', updateTime:'2026/6/16', oldLabel:'5.7', newLabel:'6.16' },
+  { key:'2026-03-W2', month:'2026-03', week:'W2', label:'3月W2', updateTime:'2026/3/14', oldLabel:'', newLabel:'3.2' },
+  { key:'2026-04-W1', month:'2026-04', week:'W1', label:'4月W1', updateTime:'2026/4/7', oldLabel:'3.2', newLabel:'4.1' },
+  { key:'2026-04-W3', month:'2026-04', week:'W3', label:'4月W3', updateTime:'2026/4/21', oldLabel:'4.1', newLabel:'4.3' },
+  { key:'2026-05-W1', month:'2026-05', week:'W1', label:'5月W1', updateTime:'2026/5/7', oldLabel:'4.3', newLabel:'5.1' },
+  { key:'2026-06-W3', month:'2026-06', week:'W3', label:'6月W3', updateTime:'2026/6/21', oldLabel:'5.1', newLabel:'6.3' },
+  { key:'2026-07-W1', month:'2026-07', week:'W1', label:'7月W1', updateTime:'2026/7/7', oldLabel:'6.3', newLabel:'7.1' },
+  { key:'2026-07-W2', month:'2026-07', week:'W2', label:'7月W2', updateTime:'2026/7/14', oldLabel:'7.1', newLabel:'7.2' }
 ];
 
 // 月份→可用周
 const MONTH_WEEKS = {
   '2026-03': ['W2'],
-  '2026-04': ['W1','W3'],
+  '2026-04': ['W1', 'W3'],
   '2026-05': ['W1'],
   '2026-06': ['W3'],
+  '2026-07': ['W1', 'W2']
 };
 
-let currentMonth = '2026-05';
-let currentWeek = 'W1';
+let currentMonth = '2026-07';
+let currentWeek = 'W2';
 let currentRegion = 'eu';
 let trendChart = null;
 
@@ -642,7 +670,7 @@ function renderTable() {
 let dropdownYear = 2026;
 
 const MONTH_NAMES = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
-const ALL_MONTHS = ['2026-03','2026-04','2026-05','2026-06'];
+const ALL_MONTHS = ['2026-03','2026-04','2026-05','2026-06','2026-07'];
 
 function monthLabel(m) {
   const [y, mm] = m.split('-');
@@ -841,10 +869,10 @@ function switchRegion(btn, region) {
 
 // ===================== Init =====================
 (function init() {
-  currentMonth = '2026-06';
-  currentWeek = 'W3';
+  currentMonth = '2026-07';
+  currentWeek = 'W2';
 
-  applyMonth('2026-06');
+  applyMonth('2026-07');
 
   const avail = MONTH_WEEKS['2026-06'];
   ['W1','W2','W3','W4'].forEach(w => {
@@ -853,7 +881,7 @@ function switchRegion(btn, region) {
     if (avail.includes(w)) btn.classList.remove('disabled');
     else btn.classList.add('disabled');
   });
-  document.getElementById('btn-W3').classList.add('active');
+  document.getElementById('btn-W2').classList.add('active');
 
   renderTable();
   renderChart();
