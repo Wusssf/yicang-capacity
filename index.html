@@ -318,7 +318,7 @@ td:last-child { border-right: none; }
   <button class="week-btn" id="btn-W2" onclick="selectWeek(this,'W2')">第二周</button>
   <button class="week-btn" id="btn-W3" onclick="selectWeek(this,'W3')">第三周</button>
   <button class="week-btn" id="btn-W4" onclick="selectWeek(this,'W4')">第四周</button>
-  <span style="margin-left:auto;" class="update-time" id="updateTimeTip">更新时间：2026/06/30 11:33:45</span>
+  <span style="margin-left:auto;" class="update-time" id="updateTimeTip">更新时间：2026/06/30 11:41:56</span>
 </div>
 
 <!-- 数据表 -->
@@ -487,20 +487,13 @@ const WAREHOUSES = [
     region:'jp', regionName:null, rowspan:0, warehouse:'千叶六方町仓',
     cbm:'-',
     snapshots:{
-      '2026-03-W2':{ useRate:'70%', urc:'rate-normal', yclCbm:'1,822.17', yclPct:'-', yps:false, oldInv:128487, newInv:122455, status:'status-down', statusText:'减少', biz:"库容充足，中大件/mini投函小件全覆盖，需要大量货物支持，日均单量多的客户优先，尽量避免测品客户以及零散客户
-（化妆品/食品类等恒温环境良好）" },
-      '2026-04-W1':{ useRate:'70%', urc:'rate-normal', yclCbm:'1,822.17', yclPct:'-', yps:false, oldInv:122455, newInv:137889, status:'status-up', statusText:'增加', biz:"库容充足，中大件/mini投函小件全覆盖，需要大量货物支持，日均单量多的客户优先，尽量避免测品客户以及零散客户
-（化妆品/食品类等恒温环境良好）" },
-      '2026-04-W3':{ useRate:'60%', urc:'rate-normal', yclCbm:'1,822.17', yclPct:'-', yps:false, oldInv:137889, newInv:123143, status:'status-down', statusText:'减少', biz:"库容充足，中大件/mini投函小件全覆盖，需要大量货物支持，日均单量多的客户优先，尽量避免测品客户以及零散客户
-（化妆品/食品类等恒温环境良好）" },
-      '2026-05-W1':{ useRate:'60%', urc:'rate-normal', yclCbm:'1,644.47', yclPct:'-', yps:false, oldInv:123143, newInv:107176, status:'status-down', statusText:'减少', biz:"库容充足，中大件/mini投函小件全覆盖，需要大量货物支持，日均单量多的客户优先，尽量避免测品客户以及零散客户
-（化妆品/食品类等恒温环境良好）" },
-      '2026-06-W3':{ useRate:'60%', urc:'rate-normal', yclCbm:'1,986.40', yclPct:'-', yps:false, oldInv:107176, newInv:121383, status:'status-up', statusText:'增加', biz:"库容充足，中大件/mini投函小件全覆盖，需要大量货物支持，日均单量多的客户优先，尽量避免测品客户以及零散客户
-（化妆品/食品类等恒温环境良好）" },
-      '2026-07-W1':{ useRate:'60%', urc:'rate-normal', yclCbm:'1,986.40', yclPct:'-', yps:false, oldInv:121383, newInv:121383, status:'status-flat', statusText:'持平', biz:"库容充足，中大件/mini投函小件全覆盖，需要大量货物支持，日均单量多的客户优先，尽量避免测品客户以及零散客户
-（化妆品/食品类等恒温环境良好）" },
-      '2026-07-W2':{ useRate:'60%', urc:'rate-normal', yclCbm:'1,998.37', yclPct:'-', yps:false, oldInv:121383, newInv:115404, status:'status-down', statusText:'减少', biz:"库容充足，中大件/mini投函小件全覆盖，需要大量货物支持，日均单量多的客户优先，尽量避免测品客户以及零散客户
-（化妆品/食品类等恒温环境良好）" }
+      '2026-03-W2':{ useRate:'70%', urc:'rate-normal', yclCbm:'1,822.17', yclPct:'-', yps:false, oldInv:128487, newInv:122455, status:'status-down', statusText:'减少', biz:"库容充足，中大件/mini投函小件全覆盖，需要大量货物支持，日均单量多的客户优先，尽量避免测品客户以及零散客户\n（化妆品/食品类等恒温环境良好）" },
+      '2026-04-W1':{ useRate:'70%', urc:'rate-normal', yclCbm:'1,822.17', yclPct:'-', yps:false, oldInv:122455, newInv:137889, status:'status-up', statusText:'增加', biz:"库容充足，中大件/mini投函小件全覆盖，需要大量货物支持，日均单量多的客户优先，尽量避免测品客户以及零散客户\n（化妆品/食品类等恒温环境良好）" },
+      '2026-04-W3':{ useRate:'60%', urc:'rate-normal', yclCbm:'1,822.17', yclPct:'-', yps:false, oldInv:137889, newInv:123143, status:'status-down', statusText:'减少', biz:"库容充足，中大件/mini投函小件全覆盖，需要大量货物支持，日均单量多的客户优先，尽量避免测品客户以及零散客户\n（化妆品/食品类等恒温环境良好）" },
+      '2026-05-W1':{ useRate:'60%', urc:'rate-normal', yclCbm:'1,644.47', yclPct:'-', yps:false, oldInv:123143, newInv:107176, status:'status-down', statusText:'减少', biz:"库容充足，中大件/mini投函小件全覆盖，需要大量货物支持，日均单量多的客户优先，尽量避免测品客户以及零散客户\n（化妆品/食品类等恒温环境良好）" },
+      '2026-06-W3':{ useRate:'60%', urc:'rate-normal', yclCbm:'1,986.40', yclPct:'-', yps:false, oldInv:107176, newInv:121383, status:'status-up', statusText:'增加', biz:"库容充足，中大件/mini投函小件全覆盖，需要大量货物支持，日均单量多的客户优先，尽量避免测品客户以及零散客户\n（化妆品/食品类等恒温环境良好）" },
+      '2026-07-W1':{ useRate:'60%', urc:'rate-normal', yclCbm:'1,986.40', yclPct:'-', yps:false, oldInv:121383, newInv:121383, status:'status-flat', statusText:'持平', biz:"库容充足，中大件/mini投函小件全覆盖，需要大量货物支持，日均单量多的客户优先，尽量避免测品客户以及零散客户\n（化妆品/食品类等恒温环境良好）" },
+      '2026-07-W2':{ useRate:'60%', urc:'rate-normal', yclCbm:'1,998.37', yclPct:'-', yps:false, oldInv:121383, newInv:115404, status:'status-down', statusText:'减少', biz:"库容充足，中大件/mini投函小件全覆盖，需要大量货物支持，日均单量多的客户优先，尽量避免测品客户以及零散客户\n（化妆品/食品类等恒温环境良好）" }
     }
   },
   {
