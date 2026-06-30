@@ -318,7 +318,7 @@ td:last-child { border-right: none; }
   <button class="week-btn" id="btn-W2" onclick="selectWeek(this,'W2')">第二周</button>
   <button class="week-btn" id="btn-W3" onclick="selectWeek(this,'W3')">第三周</button>
   <button class="week-btn" id="btn-W4" onclick="selectWeek(this,'W4')">第四周</button>
-  <span style="margin-left:auto;" class="update-time" id="updateTimeTip">更新时间：2026/06/30 13:26:34</span>
+  <span style="margin-left:auto;" class="update-time" id="updateTimeTip">更新时间：2026/06/30 13:55:03</span>
 </div>
 
 <!-- 数据表 -->
@@ -573,28 +573,23 @@ function renderTable() {
     if (!d) return;
     const tr = document.createElement('tr');
 
-    if (wh.rowspan > 0) {
-      // 检查实际需要合并的行数（排除没有当前时间数据的同行仓库）
-      let actualRowspan = 0;
-      const regionWhs = WAREHOUSES.filter(w => w.region === wh.region);
-      const startIdx = WAREHOUSES.indexOf(wh);
-      for (let i = startIdx; i < WAREHOUSES.length && WAREHOUSES[i].region === wh.region; i++) {
-        if (WAREHOUSES[i].snapshots[key]) actualRowspan++;
-      }
+    // 修复: 强制给每行都创建 region td (用 .style.display='none' 占位), 保证 10 列对齐
+    {
       const td = document.createElement('td');
       td.className = 'region-cell';
-      td.rowSpan = actualRowspan;
-      td.textContent = wh.regionName;
-      tr.appendChild(td);
-    } else if (wh.rowspan === 0) {
-      // 检查同区域前一个仓库是否有当前时间的数据，没有则自己显示区域名
-      const prevWh = WAREHOUSES[WAREHOUSES.indexOf(wh) - 1];
-      if (prevWh && prevWh.region === wh.region && !prevWh.snapshots[key]) {
-        const td = document.createElement('td');
-        td.className = 'region-cell';
-        td.textContent = WAREHOUSES.filter(w => w.region === wh.region && w.rowspan > 0)[0]?.regionName || '';
-        tr.appendChild(td);
+      if (wh.rowspan > 0) {
+        let actualRowspan = 0;
+        const startIdx = WAREHOUSES.indexOf(wh);
+        for (let i = startIdx; i < WAREHOUSES.length && WAREHOUSES[i].region === wh.region; i++) {
+          if (WAREHOUSES[i].snapshots[key]) actualRowspan++;
+        }
+        td.rowSpan = actualRowspan;
+        td.textContent = wh.regionName;
+      } else {
+        // rowspan=0 的行: 区域名由 rowspan>0 的行显示, 这里用空 td 占位保证列对齐
+        td.style.display = 'none';
       }
+      tr.appendChild(td);
     }
 
     // 仓库名
