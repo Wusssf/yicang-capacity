@@ -318,7 +318,7 @@ td:last-child { border-right: none; }
   <button class="week-btn" id="btn-W2" onclick="selectWeek(this,'W2')">第二周</button>
   <button class="week-btn" id="btn-W3" onclick="selectWeek(this,'W3')">第三周</button>
   <button class="week-btn" id="btn-W4" onclick="selectWeek(this,'W4')">第四周</button>
-  <span style="margin-left:auto;" class="update-time" id="updateTimeTip">更新时间：2026/06/30 10:25:29</span>
+  <span style="margin-left:auto;" class="update-time" id="updateTimeTip">更新时间：2026/06/30 10:59:49</span>
 </div>
 
 <!-- 数据表 -->
@@ -533,23 +533,26 @@ const WAREHOUSES = [
 
 // 可用时间节点及显示信息
 const SNAPSHOTS = [
-  { key:'2026-03-W2', month:'2026-03', week:'W2', label:'3月W2', updateTime:'2026/3/13', oldLabel:'2.27', newLabel:'3.13' },
-  { key:'2026-04-W1', month:'2026-04', week:'W1', label:'4月W1', updateTime:'2026/4/10', oldLabel:'3.13', newLabel:'4.10' },
-  { key:'2026-04-W3', month:'2026-04', week:'W3', label:'4月W3', updateTime:'2026/4/24', oldLabel:'4.10', newLabel:'4.24' },
-  { key:'2026-05-W1', month:'2026-05', week:'W1', label:'5月W1', updateTime:'2026/5/8', oldLabel:'4.24', newLabel:'5.7' },
-  { key:'2026-06-W3', month:'2026-06', week:'W3', label:'6月W3', updateTime:'2026/6/16', oldLabel:'5.7', newLabel:'6.16' },
+  { key:'2026-03-W2', month:'2026-03', week:'W2', label:'3月W2', updateTime:'2026/3/14', oldLabel:'', newLabel:'3.2' },
+  { key:'2026-04-W1', month:'2026-04', week:'W1', label:'4月W1', updateTime:'2026/4/7', oldLabel:'3.2', newLabel:'4.1' },
+  { key:'2026-04-W3', month:'2026-04', week:'W3', label:'4月W3', updateTime:'2026/4/21', oldLabel:'4.1', newLabel:'4.3' },
+  { key:'2026-05-W1', month:'2026-05', week:'W1', label:'5月W1', updateTime:'2026/5/7', oldLabel:'4.3', newLabel:'5.1' },
+  { key:'2026-06-W3', month:'2026-06', week:'W3', label:'6月W3', updateTime:'2026/6/21', oldLabel:'5.1', newLabel:'6.3' },
+  { key:'2026-07-W1', month:'2026-07', week:'W1', label:'7月W1', updateTime:'2026/7/7', oldLabel:'6.3', newLabel:'7.1' },
+  { key:'2026-07-W2', month:'2026-07', week:'W2', label:'7月W2', updateTime:'2026/7/14', oldLabel:'7.1', newLabel:'7.2' }
 ];
 
 // 月份→可用周
 const MONTH_WEEKS = {
   '2026-03': ['W2'],
-  '2026-04': ['W1','W3'],
+  '2026-04': ['W1', 'W3'],
   '2026-05': ['W1'],
   '2026-06': ['W3'],
+  '2026-07': ['W1', 'W2']
 };
 
-let currentMonth = '2026-05';
-let currentWeek = 'W1';
+let currentMonth = '2026-07';
+let currentWeek = 'W2';
 let currentRegion = 'eu';
 let trendChart = null;
 
@@ -869,7 +872,7 @@ function switchRegion(btn, region) {
   currentMonth = '2026-06';
   currentWeek = 'W3';
 
-  applyMonth('2026-06');
+  applyMonth('2026-07');
 
   const avail = MONTH_WEEKS['2026-06'];
   ['W1','W2','W3','W4'].forEach(w => {
@@ -878,7 +881,7 @@ function switchRegion(btn, region) {
     if (avail.includes(w)) btn.classList.remove('disabled');
     else btn.classList.add('disabled');
   });
-  document.getElementById('btn-W3').classList.add('active');
+  document.getElementById('btn-W2').classList.add('active');
 
   renderTable();
   renderChart();
