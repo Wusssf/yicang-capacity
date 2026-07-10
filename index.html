@@ -226,6 +226,9 @@ td:last-child { border-right: none; }
 
 .inv-old { color: #f44336; font-weight: 700; font-size: 13px; }
 .inv-new { color: #43a047; font-weight: 700; font-size: 13px; }
+.inv-diff-up { color: #43a047; font-weight: 700; font-size: 13px; }
+.inv-diff-down { color: #f44336; font-weight: 700; font-size: 13px; }
+.inv-diff-flat { color: #333; font-size: 13px; }
 .status-down     { color: #f44336; font-weight: 600; font-size: 13px; white-space: nowrap; }
 .status-up       { color: #43a047; font-weight: 600; font-size: 13px; white-space: nowrap; }
 .status-flat     { color: #333; font-size: 13px; white-space: nowrap; }
@@ -288,6 +291,7 @@ td:last-child { border-right: none; }
   .rate-red, .rate-orange { color: #333 !important; background: transparent !important; }
   .inv-old { color: #333 !important; }
   .inv-new { color: #333 !important; }
+  .inv-diff-up, .inv-diff-down { color: #333 !important; }
   .status-down, .status-up { color: #333 !important; }
   thead tr { background: #1c2b5e !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .region-cell { background: #eef1fb !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -335,11 +339,12 @@ td:last-child { border-right: none; }
         <col style="width:120px">
         <col style="width:120px">
         <col style="width:100px">
+        <col style="width:100px">
         <col>
       </colgroup>
       <thead>
         <tr>
-          <th>国家区域</th>
+          <th>区域</th>
           <th>仓库</th>
           <th>仓库设计库容<br>(CBM)</th>
           <th>仓库实际使用率</th>
@@ -347,6 +352,7 @@ td:last-child { border-right: none; }
           <th class="pct-cell">YCL在库库容占比<br><span style="font-weight:400;font-size:11px;">(YCL在库库存占仓库实际库存的比例)</span></th>
 <th id="th-old" style="color:#ef9a9a;font-size:14px;">在库库存总量<br><span style="font-size:11px;font-weight:400;">(PCS) — 上期</span></th>
       <th id="th-new" style="color:#a5d6a7;font-size:14px;">在库库存总量<br><span style="font-size:11px;font-weight:400;">(PCS) — 当期</span></th>
+          <th>变化量<br><span style="font-size:11px;font-weight:400;">(PCS)</span></th>
           <th>对比入仓库存<br>变化情况</th>
           <th>业务诉求</th>
         </tr>
@@ -637,6 +643,21 @@ function renderTable() {
     tdNew.className = 'inv-new';
     tdNew.textContent = typeof d.newInv === 'number' ? d.newInv.toLocaleString() : d.newInv;
     tr.appendChild(tdNew);
+
+    // 变化量 (对比数据)
+    const tdDiff = document.createElement('td');
+    if (typeof d.oldInv === 'number' && typeof d.newInv === 'number') {
+      const diff = d.newInv - d.oldInv;
+      const sign = diff > 0 ? '+' : '';
+      tdDiff.textContent = sign + diff.toLocaleString();
+      if (diff > 0) tdDiff.className = 'inv-diff-up';
+      else if (diff < 0) tdDiff.className = 'inv-diff-down';
+      else tdDiff.className = 'inv-diff-flat';
+    } else {
+      tdDiff.textContent = '-';
+      tdDiff.className = 'inv-diff-flat';
+    }
+    tr.appendChild(tdDiff);
 
     // 状态
     const tdSt = document.createElement('td');
