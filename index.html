@@ -425,7 +425,7 @@ const WAREHOUSES = [
     }
   },
   {
-    region:'uk', regionName:null, rowspan:0, warehouse:'拉格比仓',
+    region:'uk', regionName:'英国（UK）', rowspan:2, warehouse:'拉格比仓',
     cbm:3500,
     snapshots:{
       '2026-03-W2':{ useRate:'85%', urc:'rate-normal', yclCbm:'1403.63', yclPct:'47%', yps:false, oldInv:116925, newInv:116732, status:'status-flat', statusText:'持平', biz:"" },
@@ -451,7 +451,7 @@ const WAREHOUSES = [
     }
   },
   {
-    region:'us', regionName:null, rowspan:0, warehouse:'洛杉矶3仓',
+    region:'us', regionName:'美国（US）', rowspan:2, warehouse:'洛杉矶3仓',
     cbm:7034,
     snapshots:{
       '2026-03-W2':{ useRate:'75%', urc:'rate-normal', yclCbm:'628.61', yclPct:'12%', yps:false, oldInv:82458, newInv:93676, status:'status-up', statusText:'增加', biz:"仓库增值服务正持续完善执行流程。" },
@@ -477,7 +477,7 @@ const WAREHOUSES = [
     }
   },
   {
-    region:'jp', regionName:null, rowspan:0, warehouse:'千叶天户町仓',
+    region:'jp', regionName:'日本（JP）', rowspan:4, warehouse:'千叶天户町仓',
     cbm:'-',
     snapshots:{
       '2026-03-W2':{ useRate:'95%', urc:'rate-normal', yclCbm:'476.84', yclPct:'-', yps:true, oldInv:125831, newInv:121774, status:'status-down', statusText:'减少', biz:"库容饱和，目前以退品、义达小包退货以及现有客户一件代发为主，暂无法承载大量一件代发。" },
@@ -579,22 +579,17 @@ function renderTable() {
     if (!d) return;
     const tr = document.createElement('tr');
 
-    // 修复: 强制给每行都创建 region td (用 .style.display='none' 占位), 保证 10 列对齐
-    {
+    // 区域列: 只有区域首仓库(rowspan>0)创建 td 并 rowSpan 合并, 其余行由 rowspan 覆盖不创建
+    if (wh.rowspan > 0) {
       const td = document.createElement('td');
       td.className = 'region-cell';
-      if (wh.rowspan > 0) {
-        let actualRowspan = 0;
-        const startIdx = WAREHOUSES.indexOf(wh);
-        for (let i = startIdx; i < WAREHOUSES.length && WAREHOUSES[i].region === wh.region; i++) {
-          if (WAREHOUSES[i].snapshots[key]) actualRowspan++;
-        }
-        td.rowSpan = actualRowspan;
-        td.textContent = wh.regionName;
-      } else {
-        // rowspan=0 的行: 区域名由 rowspan>0 的行显示, 这里用空 td 占位保证列对齐
-        td.style.display = 'none';
+      let actualRowspan = 0;
+      const startIdx = WAREHOUSES.indexOf(wh);
+      for (let i = startIdx; i < WAREHOUSES.length && WAREHOUSES[i].region === wh.region; i++) {
+        if (WAREHOUSES[i].snapshots[key]) actualRowspan++;
       }
+      td.rowSpan = actualRowspan;
+      td.textContent = wh.regionName;
       tr.appendChild(td);
     }
 
