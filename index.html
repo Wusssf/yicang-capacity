@@ -322,7 +322,7 @@ td:last-child { border-right: none; }
   <button class="week-btn" id="btn-W2" onclick="selectWeek(this,'W2')">第二周</button>
   <button class="week-btn" id="btn-W3" onclick="selectWeek(this,'W3')">第三周</button>
   <button class="week-btn" id="btn-W4" onclick="selectWeek(this,'W4')">第四周</button>
-  <span style="margin-left:auto;" class="update-time" id="updateTimeTip">更新时间：2026/6/16</span>
+  <span style="margin-left:auto;" class="update-time" id="updateTimeTip">更新时间：2026/7/10</span>
 </div>
 
 <!-- 数据表 -->
@@ -393,20 +393,20 @@ td:last-child { border-right: none; }
 // =====================================================================
 
 // 时间节点标签（用于折线图）
-const TIME_LABELS = ['3月W2', '4月W1', '4月W3', '5月W1', '6月W3'];
+const TIME_LABELS = ['3月W2', '4月W1', '4月W3', '5月W1', '6月W3', '7月W2'];
 
 // 每张截图对应的数据
 // key: 仓库名, value: [3月W2当期, 4月W1当期, 4月W3当期, 5月W1当期]
 const HISTORY = {
-  '柏林仓':     [144490, 122556, 115771, 106970, 94232],
-  '拉格比仓':     [116732, 115193, 114740, 110803, 108101],
-  '卢顿仓':     [92347, 85781, 82994, 87746, 96767],
-  '洛杉矶3仓':     [93676, 87484, 85546, 84023, 93822],
-  '美东2615仓':     [83502, 78204, 73967, 67398, 42254],
-  '千叶天户町仓':     [121774, 127090, 124201, 122034, 90762],
-  '千叶六方町仓':     [122455, 137889, 123143, 107176, 121383],
-  '大阪箕面仓':     [123767, 114078, 113241, 104319, 106089],
-  '大阪贝塚仓':     [13823, 13039, 12769, 12544, 11746]
+  '柏林仓':     [144490, 122556, 115771, 106970, 94232, 89750],
+  '拉格比仓':     [116732, 115193, 114740, 110803, 108101, 102039],
+  '卢顿仓':     [92347, 85781, 82994, 87746, 96767, 93481],
+  '洛杉矶3仓':     [93676, 87484, 85546, 84023, 93822, 99902],
+  '美东2615仓':     [83502, 78204, 73967, 67398, 42254, 41648],
+  '千叶天户町仓':     [121774, 127090, 124201, 122034, 90762, 79065],
+  '千叶六方町仓':     [122455, 137889, 123143, 107176, 121383, 120041],
+  '大阪箕面仓':     [123767, 114078, 113241, 104319, 106089, 101250],
+  '大阪贝塚仓':     [13823, 13039, 12769, 12544, 11746, 11163]
 };
 
 // 表格完整数据，按时间节点
@@ -420,6 +420,7 @@ const WAREHOUSES = [
       '2026-04-W3':{ useRate:'65%', urc:'rate-normal', yclCbm:'1013.77', yclPct:'29%', yps:false, oldInv:122556, newInv:115771, status:'status-down', statusText:'减少', biz:"" },
       '2026-05-W1':{ useRate:'69%', urc:'rate-normal', yclCbm:'956.69', yclPct:'100%', yps:false, oldInv:115771, newInv:106970, status:'status-down', statusText:'减少', biz:"" },
       '2026-06-W3':{ useRate:'65%', urc:'rate-normal', yclCbm:'1094.03', yclPct:'-', yps:false, oldInv:106970, newInv:94232, status:'status-down', statusText:'减少', biz:"" },
+      '2026-07-W2':{ useRate:'-', urc:'rate-normal', yclCbm:'1,152.01', yclPct:'61%', yps:false, oldInv:94232, newInv:89750, status:'status-down', statusText:'减少', biz:"" }
     }
   },
   {
@@ -431,6 +432,7 @@ const WAREHOUSES = [
       '2026-04-W3':{ useRate:'85%', urc:'rate-normal', yclCbm:'1815.79', yclPct:'61%', yps:false, oldInv:115193, newInv:114740, status:'status-flat', statusText:'持平', biz:"" },
       '2026-05-W1':{ useRate:'85%', urc:'rate-normal', yclCbm:'1,631.76', yclPct:'55%', yps:false, oldInv:114740, newInv:110803, status:'status-down', statusText:'减少', biz:"" },
       '2026-06-W3':{ useRate:'85%', urc:'rate-normal', yclCbm:'1,844.35', yclPct:'52%', yps:false, oldInv:110803, newInv:108101, status:'status-flat', statusText:'持平', biz:"" },
+      '2026-07-W2':{ useRate:'85%', urc:'rate-normal', yclCbm:'1,616.66', yclPct:'81%', yps:false, oldInv:108101, newInv:102039, status:'status-down', statusText:'减少', biz:"" }
     }
   },
   {
@@ -442,6 +444,7 @@ const WAREHOUSES = [
       '2026-04-W3':{ useRate:'50%', urc:'rate-normal', yclCbm:'359', yclPct:'17%', yps:false, oldInv:85781, newInv:82994, status:'status-down', statusText:'减少', biz:"全货型仓库，新客户优先入卢顿仓。" },
       '2026-05-W1':{ useRate:'50%', urc:'rate-normal', yclCbm:'581.55', yclPct:'25%', yps:false, oldInv:82994, newInv:87746, status:'status-up', statusText:'增加', biz:"全货型仓库，新客户优先入卢顿仓。" },
       '2026-06-W3':{ useRate:'50%', urc:'rate-normal', yclCbm:'606.15', yclPct:'29%', yps:false, oldInv:87746, newInv:96767, status:'status-up', statusText:'增加', biz:"全货型仓库，新客户优先入卢顿仓。" },
+      '2026-07-W2':{ useRate:'90%', urc:'rate-normal', yclCbm:'1,700.09', yclPct:'80%', yps:false, oldInv:96762, newInv:93481, status:'status-down', statusText:'减少', biz:"" }
     }
   },
   {
@@ -453,6 +456,7 @@ const WAREHOUSES = [
       '2026-04-W3':{ useRate:'75%', urc:'rate-normal', yclCbm:'546.06', yclPct:'10%', yps:false, oldInv:87484, newInv:85546, status:'status-down', statusText:'减少', biz:"仓库增值服务正持续完善执行流程。" },
       '2026-05-W1':{ useRate:'75%', urc:'rate-normal', yclCbm:'659.16', yclPct:'12%', yps:false, oldInv:85546, newInv:84023, status:'status-flat', statusText:'持平', biz:"仓库增值服务正持续完善执行流程。" },
       '2026-06-W3':{ useRate:'71%', urc:'rate-normal', yclCbm:'654.64', yclPct:'12%', yps:false, oldInv:84023, newInv:93822, status:'status-up', statusText:'增加', biz:"仓库增值服务正持续完善执行流程。" },
+      '2026-07-W2':{ useRate:'75%', urc:'rate-normal', yclCbm:'731.09', yclPct:'10%', yps:false, oldInv:93822, newInv:99902, status:'status-up', statusText:'增加', biz:"" }
     }
   },
   {
@@ -464,6 +468,7 @@ const WAREHOUSES = [
       '2026-04-W3':{ useRate:'61%', urc:'rate-normal', yclCbm:'442.66', yclPct:'100%', yps:true, oldInv:78204, newInv:73967, status:'status-down', statusText:'减少', biz:"接受中大件客户入仓，谨慎小件入仓。" },
       '2026-05-W1':{ useRate:'53%', urc:'rate-normal', yclCbm:'380.95', yclPct:'100%', yps:true, oldInv:69880, newInv:67398, status:'status-down', statusText:'减少', biz:"接受中大件客户入仓，谨慎小件入仓。" },
       '2026-06-W3':{ useRate:'44%', urc:'rate-normal', yclCbm:'314.23', yclPct:'109%', yps:true, oldInv:67398, newInv:42254, status:'status-down', statusText:'减少', biz:"接受中大件客户入仓，谨慎小件入仓。" },
+      '2026-07-W2':{ useRate:'53%', urc:'rate-normal', yclCbm:'722.00', yclPct:'100%', yps:true, oldInv:42754, newInv:41648, status:'status-down', statusText:'减少', biz:"" }
     }
   },
   {
@@ -475,6 +480,7 @@ const WAREHOUSES = [
       '2026-04-W3':{ useRate:'85%', urc:'rate-normal', yclCbm:'476.84', yclPct:'-', yps:true, oldInv:127090, newInv:124201, status:'status-down', statusText:'减少', biz:"库容饱和，目前以退品、义达小包退货以及现有客户一件代发为主，暂无法承载大量一件代发。" },
       '2026-05-W1':{ useRate:'85%', urc:'rate-normal', yclCbm:'400.50', yclPct:'-', yps:true, oldInv:124201, newInv:122034, status:'status-flat', statusText:'持平', biz:"库容饱和，目前以退品、义达小包退货以及现有客户一件代发为主，暂无法承载大量一件代发。" },
       '2026-06-W3':{ useRate:'88%', urc:'rate-normal', yclCbm:'286.99', yclPct:'-', yps:true, oldInv:122034, newInv:90762, status:'status-down', statusText:'减少', biz:"库容饱和，目前以退品、义达小包退货以及现有客户一件代发为主，暂无法承载大量一件代发。" },
+      '2026-07-W2':{ useRate:'85%', urc:'rate-normal', yclCbm:'-', yclPct:'-', yps:true, oldInv:90762, newInv:79065, status:'status-down', statusText:'减少', biz:"新仓开仓，正常收发货；但仓库容量已满，无法继续收货，需尽快安排转仓或分流。" }
     }
   },
   {
@@ -486,6 +492,7 @@ const WAREHOUSES = [
       '2026-04-W3':{ useRate:'60%', urc:'rate-normal', yclCbm:'1,822.17', yclPct:'-', yps:false, oldInv:137889, newInv:123143, status:'status-down', statusText:'减少', biz:"库容充足，中大件/mini投函小件全覆盖，需要大量货物支持，日均单量多的客户优先，尽量避免测品客户以及零散客户\n（化妆品/食品类等恒温环境良好）" },
       '2026-05-W1':{ useRate:'60%', urc:'rate-normal', yclCbm:'1,644.47', yclPct:'-', yps:false, oldInv:123143, newInv:107176, status:'status-down', statusText:'减少', biz:"库容充足，中大件/mini投函小件全覆盖，需要大量货物支持，日均单量多的客户优先，尽量避免测品客户以及零散客户\n（化妆品/食品类等恒温环境良好）" },
       '2026-06-W3':{ useRate:'60%', urc:'rate-normal', yclCbm:'1,986.40', yclPct:'-', yps:false, oldInv:107176, newInv:121383, status:'status-up', statusText:'增加', biz:"库容充足，中大件/mini投函小件全覆盖，需要大量货物支持，日均单量多的客户优先，尽量避免测品客户以及零散客户\n（化妆品/食品类等恒温环境良好）" },
+      '2026-07-W2':{ useRate:'60%', urc:'rate-normal', yclCbm:'-', yclPct:'-', yps:false, oldInv:121303, newInv:120041, status:'status-down', statusText:'减少', biz:"库容充足，千叶仓/四日市仓/小松仓需继续观察，后续大量到货需提前规划，目前可接收其他仓溢出库存。" }
     }
   },
   {
@@ -497,6 +504,7 @@ const WAREHOUSES = [
       '2026-04-W3':{ useRate:'70%', urc:'rate-normal', yclCbm:'1670.18', yclPct:'-', yps:false, oldInv:114078, newInv:113241, status:'status-flat', statusText:'持平', biz:"库容有所缓解，机器人设备已上线，可优先机器人操作件以及千叶大阪双仓兼用的VIP客户，货物要求三边和80厘米/重量10KG以内。" },
       '2026-05-W1':{ useRate:'70%', urc:'rate-normal', yclCbm:'1,278.48', yclPct:'-', yps:false, oldInv:113241, newInv:104319, status:'status-down', statusText:'减少', biz:"库容有所缓解，机器人设备已上线，可优先机器人操作件以及千叶大阪双仓兼用的VIP客户，货物要求三边和80厘米/重量10KG以内。" },
       '2026-06-W3':{ useRate:'70%', urc:'rate-normal', yclCbm:'1,532.06', yclPct:'-', yps:false, oldInv:104319, newInv:106089, status:'status-flat', statusText:'持平', biz:"库容有所缓解，机器人设备已上线，可优先机器人操作件以及千叶大阪双仓兼用的VIP客户，货物要求三边和80厘米/重量10KG以内。" },
+      '2026-07-W2':{ useRate:'70%', urc:'rate-normal', yclCbm:'-', yclPct:'-', yps:false, oldInv:106989, newInv:101250, status:'status-down', statusText:'减少', biz:"库容可容纳；机器人项目已上线，可优先处理机器人项目以及针对大促活动储备的VIP客户、跨境电商等第三方的7000箱头程商品约450CBM。" }
     }
   },
   {
@@ -508,6 +516,7 @@ const WAREHOUSES = [
       '2026-04-W3':{ useRate:'90%', urc:'rate-normal', yclCbm:'34.39', yclPct:'-', yps:false, oldInv:13039, newInv:12769, status:'status-flat', statusText:'持平', biz:"库容饱和，新客户暂停入仓，目前商流运营为主，少部分老客户一件代发。" },
       '2026-05-W1':{ useRate:'90%', urc:'rate-normal', yclCbm:'25.23', yclPct:'-', yps:false, oldInv:12769, newInv:12544, status:'status-flat', statusText:'持平', biz:"库容饱和，新客户暂停入仓，目前商流运营为主，少部分老客户一件代发。" },
       '2026-06-W3':{ useRate:'90%', urc:'rate-normal', yclCbm:'21.74', yclPct:'-', yps:false, oldInv:12544, newInv:11746, status:'status-down', statusText:'减少', biz:"库容饱和，新客户暂停入仓，目前商流运营为主，少部分老客户一件代发。" },
+      '2026-07-W2':{ useRate:'90%', urc:'rate-normal', yclCbm:'-', yclPct:'-', yps:false, oldInv:11746, newInv:11163, status:'status-down', statusText:'减少', biz:"库容紧张，散货不能接入，目前需优化库内作业，少部分老客户一件代发。" }
     }
   }
 ];
@@ -518,18 +527,21 @@ const SNAPSHOTS = [
   { key:'2026-04-W1', month:'2026-04', week:'W1', label:'4月W1', updateTime:'2026/4/7', oldLabel:'3.2', newLabel:'4.1' },
   { key:'2026-04-W3', month:'2026-04', week:'W3', label:'4月W3', updateTime:'2026/4/21', oldLabel:'4.1', newLabel:'4.3' },
   { key:'2026-05-W1', month:'2026-05', week:'W1', label:'5月W1', updateTime:'2026/5/7', oldLabel:'4.3', newLabel:'5.1' },
-  { key:'2026-06-W3', month:'2026-06', week:'W3', label:'6月W3', updateTime:'2026/6/16', oldLabel:'5.7', newLabel:'6.16' },];
+  { key:'2026-06-W3', month:'2026-06', week:'W3', label:'6月W3', updateTime:'2026/6/16', oldLabel:'5.7', newLabel:'6.16' },
+  { key:'2026-07-W2', month:'2026-07', week:'W2', label:'7月W2', updateTime:'2026/7/10', oldLabel:'6.16', newLabel:'7.10' }
+];
 
 // 月份→可用周
 const MONTH_WEEKS = {
   '2026-03': ['W2'],
   '2026-04': ['W1', 'W3'],
   '2026-05': ['W1'],
-  '2026-06': ['W3']
+  '2026-06': ['W3'],
+  '2026-07': ['W2']
 };
 
-let currentMonth = '2026-06';
-let currentWeek = 'W3';
+let currentMonth = '2026-07';
+let currentWeek = 'W2';
 let currentRegion = 'eu';
 let trendChart = null;
 
@@ -652,7 +664,7 @@ function renderTable() {
 let dropdownYear = 2026;
 
 const MONTH_NAMES = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
-const ALL_MONTHS = ['2026-03','2026-04','2026-05','2026-06'];
+const ALL_MONTHS = ['2026-03','2026-04','2026-05','2026-06', '2026-07'];
 
 function monthLabel(m) {
   const [y, mm] = m.split('-');
@@ -851,8 +863,8 @@ function switchRegion(btn, region) {
 
 // ===================== Init =====================
 (function init() {
-  currentMonth = '2026-06';
-  currentWeek = 'W3';
+  currentMonth = '2026-07';
+  currentWeek = 'W2';
 
   applyMonth('2026-07');
 
