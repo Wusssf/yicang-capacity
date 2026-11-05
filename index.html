@@ -322,6 +322,7 @@ td:last-child { border-right: none; }
   <button class="week-btn" id="btn-W2" onclick="selectWeek(this,'W2')">第二周</button>
   <button class="week-btn" id="btn-W3" onclick="selectWeek(this,'W3')">第三周</button>
   <button class="week-btn" id="btn-W4" onclick="selectWeek(this,'W4')">第四周</button>
+  <button class="week-btn" id="btn-W5" style="display:none;" onclick="selectWeek(this,'W5')">第五周</button>
   <span style="margin-left:auto;" class="update-time" id="updateTimeTip">更新时间：2026/9/30</span>
 </div>
 
@@ -739,21 +740,23 @@ function updateMonthDisplay() {
   document.getElementById('nextMonthBtn').disabled = idx >= ALL_MONTHS.length - 1;
 }
 
-function applyMonth(month) {
+function applyMonth(month, week) {
   currentMonth = month;
   const avail = MONTH_WEEKS[currentMonth] || [];
-  ['W1','W2','W3','W4'].forEach(w => {
+  ['W1','W2','W3','W4','W5'].forEach(w => {
     const btn = document.getElementById('btn-'+w);
     if (!btn) return;
     if (avail.includes(w)) {
       btn.classList.remove('disabled');
+      btn.style.display = '';
     } else {
       btn.classList.add('disabled');
       btn.classList.remove('active');
+      if (w === 'W5') btn.style.display = 'none';
     }
   });
   if (avail.length > 0) {
-    currentWeek = avail[0];
+    currentWeek = (week && avail.includes(week)) ? week : avail[0];
     document.querySelectorAll('.week-btn').forEach(b => b.classList.remove('active'));
     const firstBtn = document.getElementById('btn-'+currentWeek);
     if (firstBtn) firstBtn.classList.add('active');
@@ -923,22 +926,8 @@ function switchRegion(btn, region) {
 
 // ===================== Init =====================
 (function init() {
-  currentMonth = '2026-09';
-  currentWeek = 'W5';
-
-  applyMonth('2026-07');
-
-  const avail = MONTH_WEEKS['2026-07'];
-  ['W1','W2','W3','W4'].forEach(w => {
-    const btn = document.getElementById('btn-'+w);
-    if (!btn) return;
-    if (avail.includes(w)) btn.classList.remove('disabled');
-    else btn.classList.add('disabled');
-  });
-  document.getElementById('btn-W2').classList.add('active');
-
-  renderTable();
-  renderChart();
+  // 默认展示最新周期：9月W5（9.18 -> 9.30）
+  applyMonth('2026-09', 'W5');
 })();
 </script>
 </body>
